@@ -21,11 +21,11 @@ Changed?
 Calling `@change.d?` does the following:
 
 * Check if there is an entry for path in `.change.yml`
-  * If yes, read file size and compare with entry
-    * If file size matches, compare Murmur hash
-  * If no, record file size and Murmur hash
+   * If yes, read file size and compare with entry
+      * If file size matches, compare Murmur hash
+   * If no, record file size and Murmur hash
 * Look up path in dependency tree
-  * If found, also mark all dependency parent paths as changed
+   * If found, also mark all dependency parent paths as changed
 
 Dependencies
 ------------
