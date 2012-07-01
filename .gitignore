@@ -1,6 +1,9 @@
 .DS_Store
 *.gem
 .bundle
+bin/murmur3
+ext/change/change
+ext/change/*.o
 Gemfile.lock
 pkg
 tmp

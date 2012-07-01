@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.name        = "change"
   s.version     = '0.1.0'
   s.platform    = Gem::Platform::RUBY
-  s.authors     = []
-  s.email       = []
+  s.authors     = [ 'Winton Welsh' ]
+  s.email       = [ 'mail@wintoni.us' ]
   s.homepage    = "http://"
   s.summary     = %q{}
   s.description = %q{}
