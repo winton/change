@@ -5,34 +5,37 @@
 #include "murmur3.h"
 
 int main(int argc, char **argv) {
-  uint32_t hash[4];                /* Output for the hash */
-  uint32_t seed = 42;              /* Seed value for hash */
-  char *buffer;
+  uint32_t hash[4];    /* Output for the hash */
+  uint32_t seed = 42;  /* Seed value for hash */
 
-  if (argc != 2) {
-    printf("usage: %s \"path\"\n", argv[0]);
-    exit(1);
-  }
+  int x;
 
-  FILE *fh = fopen(argv[1], "rb");
+  for (x = 1; x < argc; x++) {
+    FILE *fh = fopen(argv[x], "rb");
 
-  if (fh != NULL) {
-    fseek(fh, 0L, SEEK_END);
-    long s = ftell(fh);
-    buffer = malloc(s);
-    
-    rewind(fh);
+    if (fh != NULL) {
+      fseek(fh, 0L, SEEK_END);
+      long s = ftell(fh);
 
-    if (buffer != NULL) {
-      fread(buffer, s, 1, fh);
-      fclose(fh); fh = NULL;
- 
+      char *buffer = malloc(s + 1);
+      buffer[s] = '\0';
+      
+      rewind(fh);
+
+      if (s != 0) {
+        fread(buffer, s, 1, fh);
+        fclose(fh);
+        fh = NULL;
+      }
+   
       MurmurHash3_x86_32(buffer, strlen(buffer), seed, hash);
       printf("%08u\n", hash[0]);
  
       free(buffer);
+
+      if (fh != NULL)
+        fclose(fh);
     }
-    if (fh != NULL) fclose(fh);
   }
 
   return 0;

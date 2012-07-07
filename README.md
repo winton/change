@@ -15,6 +15,8 @@ Changed?
 
     @change = Change.new("/absolute/path")
     @change.d?("relative/path")
+    @change.d        # { :add => [], :mod => [], :rem => [] }
+    @change.d(true)  # reload
 
 `Change` uses a YAML file stored in the root directory called `.change.yml` to maintain state.
 
@@ -32,16 +34,22 @@ Dependencies
 
 Sometimes you want to say "if this file changes, then these other files should change as well".
 
+To group dependencies, `Change` uses the concept of a "session":
+
     @change = Change.new("/absolute/path")
-    @change.d(:some_id)         # set id (must be symbol)
-    @change.d("relative/path")  # add dependency
-    @change.d(null)				# unset id (must run this when finished)
+    @change.s(:some_id)         # start session with id
+    @change.r("relative/path")  # record dependency
+    @change.s(nil)              # stop session
 
-If you use `@change.d?` after an id is set, it will return true if any dependencies from the last execution changed.
+If you use `@change.d?` within a session, it will return true if any dependencies have changed. `Change` recalls the dependencies from the last session to achieve this.
 
-Tell `Change` to record which files were modified while an id was set during last execution:
+  @change.s(:some_id)
+  @change.d?('relative/path')
+    # returns true if any dependencies have changed
+    # dependencies are recalled from LAST :some_id session
 
-	@change = Change.new("/absolute/path", :record => true)
-	@change.d(:some_id)  # set id (must be symbol)
-    @change.d			 # modified files from last session (hash)
-    @change.d(null)		 # unset id (must run this when finished)
+Recall files that were modified during the last execution of this session:
+
+  @change.s(:some_id) do
+    @change.d_  # returns: { :add => [], :mod => [], :rem => [] }
+  end

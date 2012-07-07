@@ -6,4 +6,5 @@ ext/change/change
 ext/change/*.o
 Gemfile.lock
 pkg
+spec/tmp
 tmp
