@@ -73,7 +73,7 @@ describe Change do
   end
 
   describe :d? do
-    it "should return state if present" do
+    it "should return changed boolean" do
       File.open("#{@tmp}/modify.txt", 'w') { |f| f.write('!!') }
       @change.d(true)
       @change.d?('add.txt').should == false

@@ -48,6 +48,5 @@ If you use `@change.d?` within a session, it will return true if any dependencie
 
 Recall files that were modified during the last execution of this session:
 
-    @change.s(:some_id) do
-      @change.d_  # returns: { :add => [], :mod => [], :rem => [] }
-    end
+    @change.s(:some_id)
+    @change.d_  # returns: { :add => [], :mod => [], :rem => [] }
