@@ -80,7 +80,7 @@ class Change
   private
 
   def data
-    @data ||= YAML.load(File.read("#{@root}/.change.yml")) rescue {}
+    @data ||= (YAML.load(File.read("#{@root}/.change.yml")) rescue {})
   end
 
   def murmur_bin
