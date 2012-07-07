@@ -32,8 +32,6 @@ Calling `@change.d?` does the following:
 Dependencies
 ------------
 
-Sometimes you want to say "if this file changes, then these other files should change as well".
-
 To group dependencies, `Change` uses the concept of a "session":
 
     @change = Change.new("/absolute/path")
@@ -43,13 +41,13 @@ To group dependencies, `Change` uses the concept of a "session":
 
 If you use `@change.d?` within a session, it will return true if any dependencies have changed. `Change` recalls the dependencies from the last session to achieve this.
 
-  @change.s(:some_id)
-  @change.d?('relative/path')
-    # returns true if any dependencies have changed
-    # dependencies are recalled from LAST :some_id session
+    @change.s(:some_id)
+    @change.d?('relative/path')
+      # returns true if any dependencies have changed
+      # dependencies are recalled from LAST :some_id session
 
 Recall files that were modified during the last execution of this session:
 
-  @change.s(:some_id) do
-    @change.d_  # returns: { :add => [], :mod => [], :rem => [] }
-  end
+    @change.s(:some_id) do
+      @change.d_  # returns: { :add => [], :mod => [], :rem => [] }
+    end
