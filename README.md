@@ -5,6 +5,8 @@ What files changed since last time?
 
 With dependency management and super fast hashing ([Murmur3](https://github.com/PeterScott/murmur3)).
 
+[![Build Status](https://secure.travis-ci.org/winton/change.png)](http://travis-ci.org/winton/change)
+
 Requirements
 ------------
 
