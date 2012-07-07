@@ -10,9 +10,9 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = [ 'Winton Welsh' ]
   s.email       = [ 'mail@wintoni.us' ]
-  s.homepage    = "http://"
-  s.summary     = %q{}
-  s.description = %q{}
+  s.homepage    = "http://github.com/winton/change"
+  s.summary     = %q{What files changed since last time?}
+  s.description = %q{What files changed since last time? With dependency management and super fast hashing (Murmur3).}
 
   s.executables = `cd #{root} && git ls-files bin/*`.split("\n").collect { |f| File.basename(f) }
   s.extensions = [ 'ext/change/extconf.rb' ]
