@@ -1,13 +1,13 @@
 require 'fileutils'
 require 'spec_helper'
 
-describe Change do
+describe ::Change do
 
   before :all do
     @root = File.expand_path('../../', __FILE__)
     FileUtils.rm_rf(@tmp = "#{@root}/spec/tmp")
     FileUtils.cp_r("#{@root}/spec/fixture", @tmp)
-    @change = Change.new(@tmp)
+    @change = ::Change.new(@tmp)
   end
 
   describe :d do
@@ -63,7 +63,7 @@ describe Change do
     end
 
     it "should save state" do
-      @change = Change.new(@tmp)
+      @change = ::Change.new(@tmp)
       @change.d.should == {
         :add => [],
         :mod => [],
