@@ -21,10 +21,10 @@ class Change
     if @d && !reload
       @d
     else
-      paths = Dir.chdir(@root) { Dir["**/*"] }
-      add = paths - states.keys
-      rem = states.keys - paths
-      hashes = murmur_hashes(paths)
+      paths  = Dir.chdir(@root) { Dir["**/*"] }
+      add    = paths - states.keys
+      rem    = states.keys - paths
+      hashes = file_hashes(paths)
 
       mod = paths.inject([]) do |array, path|
         hash = hashes[path]
@@ -83,15 +83,11 @@ class Change
     @data ||= (YAML.load(File.read("#{@root}/.change.yml")) rescue {})
   end
 
-  def murmur_bin
-    @murmur ||= File.expand_path('../../bin/murmur3', __FILE__)
-  end
-
-  def murmur_hashes(paths)
-    hashes = Dir.chdir(@root) do
-      `#{murmur_bin} #{paths.collect { |m| "'#{m}'" }.join(' ')}`
+  def file_hashes(paths)
+    paths.inject({}) do |memo, path|
+      memo[path] = Digest::MD5.hexdigest(File.read("#{@root}/#{path}"))
+      memo
     end
-    Hash[paths.zip(hashes.split("\n"))]
   end
 
   def deps

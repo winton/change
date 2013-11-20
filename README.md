@@ -3,8 +3,6 @@ Change
 
 What files changed since last time?
 
-With dependency management and super fast hashing ([Murmur3](https://github.com/PeterScott/murmur3)).
-
 [![Build Status](https://secure.travis-ci.org/winton/change.png)](http://travis-ci.org/winton/change)
 
 Requirements
@@ -26,8 +24,8 @@ Calling `@change.d?` does the following:
 
 * Check if there is an entry for path in `.change.yml`
    * If yes, read file size and compare with entry
-      * If file size matches, compare Murmur hash
-   * If no, record file size and Murmur hash
+      * If file size matches, compare hash
+   * If no, record file size and hash
 * Look up path in dependency tree
    * If found, also mark all dependency parent paths as changed
 
