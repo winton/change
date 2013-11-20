@@ -22,6 +22,7 @@ class Change
       @d
     else
       paths  = Dir.chdir(@root) { Dir["**/*"] }
+      paths  = Dir.chdir(@root) { paths.select { |p| File.file?(p) } }
       add    = paths - states.keys
       rem    = states.keys - paths
       hashes = file_hashes(paths)
