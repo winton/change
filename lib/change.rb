@@ -48,7 +48,7 @@ class Change
 
       write!
 
-      @d = { :add => add, :mod => mod, :rem => rem }
+      @d = { :add => add.sort, :mod => mod.sort, :rem => rem.sort }
     end
   end
 
